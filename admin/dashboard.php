@@ -10,7 +10,7 @@ if (!$user->im_logIn() || (trim ($user->session()) == '')) {
 	$user->rd('logout.php');
 }
 
-$ky = $_SESSION['authbjgvjhv78547545gff3426587xgxgfbn'];
+$ky = $user->session();
 $details = $user->admLoginDetails($ky);
 foreach ($details as $key) {
     $name = $key['name'];

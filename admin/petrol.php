@@ -8,7 +8,6 @@ function esc($var)
 
 class DB{
     //public $LIMIT_PER_PAGE = '5';
-
     private $host = 'localhost';
     private $username = 'root';
     private $password = '';

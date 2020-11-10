@@ -7,7 +7,7 @@ $error = $succmsg = $errmsg = $error2 = $succmsg2 = $errmsg2 = '';
 if (!$Event->im_logIn() ||(trim ($Event->session()) == '')) {
 	$Event->rd('login.php');
 }
-$ky = $_SESSION['authbjgvjhv78547545gff3426587xgxgfbn'];
+$ky = $Event->session();
 $details = $Event->admLoginDetails($ky);
 foreach ($details as $key) {
     $name = $key['name'];
@@ -53,7 +53,6 @@ if (isset($_POST['EditEventBtn'])) {
      $ky = rand(54357, 87654);
      $uniqKey = rand(23097, 65409).'-'.$ky;     
      // user input data array.
-     $uniqKey = rand(23097, 65409).'-'.$title;
      $update = array($date, $starTtime, $endTime, $title, $post, $author, $venue, $uniqKey);
 
      // statement to validate dublicate data.
@@ -75,8 +74,8 @@ if (isset($_POST['EditEventBtn'])) {
          $succmsg = 'Event post Updated successfully!';
          echo "<script>
          setTimeout(function(){
-            window.location.href = 'https://www.tutorialspoint.com/javascript/';
-         }, 5000);
+            window.location.href = 'adm_event_view.php';
+         }, 3000);
           </script>";
        }else{
          $error = 1;
@@ -134,115 +133,118 @@ if (isset($_POST['EditPicBtn'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-
+    <!--link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous"-->
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"">
+    
     <title>Edit Event Post</title>
   </head>
   <body>
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-8">
-      <h1>Edit Event</h1>
-      <a class="btn btn-success" href="dashboard.php" role="button">Go to Dashboard</a>
-      <a class="btn btn-success" href="adm_event_view.php" role="button">View Event</a>
-      <?php if($error === 0 || $error2 === 0){?>
-      <div class="alert alert-success" role="alert">
-        <?php echo $succmsg; ?>
-      </div>
-      <?php }?>
-      <?php if($error === 1 || $error2 === 1){?>
-      <div class="alert alert-danger" role="alert">
-        <?php echo $errmsg; ?>
-      </div>
-      <?php }?>
-      <div class="card text-center">
-            <div class="card-header">
-                <ul class="nav nav-tabs card-header-tabs">
-                    <li class="nav-item">
-                    <a class="nav-link active" href="#">Details</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" data-toggle="modal" data-target="#staticBackdrop" href="#">Image Update</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="card-body">
-              <!--fghh-->
-              <form action="" method="post" enctype="multipart/form-data">
-                <div class="row">
-                  <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="exampleFormControlInput1">Date</label>
-                        <input type="date" value="<?php echo $Edate;?>" name="Edate" class="form-control" id="exampleFormControlInput1" placeholder="Date">
-                    </div>
-                  </div>
-
-                  <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="exampleFormControlInput1">Starting Time</label>
-                        <input type="time" name="stime" value="<?php echo $startTime;?>" class="form-control" id="exampleFormControlInput1" placeholder="Starting Time">
-                    </div>
-                  </div>
-
-                  <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="exampleFormControlInput1">Ending  Time</label>
-                        <input type="time" name="etime" value="<?php echo $endTime;?>" class="form-control" id="exampleFormControlInput1" placeholder="Ending Time">
-                    </div>
+        <h1>Edit Event</h1>
+        <a class="btn btn-success" href="dashboard.php" role="button">Go to Dashboard</a>
+        <a class="btn btn-success" href="adm_event_view.php" role="button">View Event</a>
+        <?php if($error === 0 || $error2 === 0){?>
+        <div class="alert alert-success" role="alert">
+          <?php echo $succmsg; ?>
+        </div>
+        <?php }?>
+        <?php if($error === 1 || $error2 === 1){?>
+        <div class="alert alert-danger" role="alert">
+          <?php echo $errmsg; ?>
+        </div>
+        <?php }?>
+        <div class="card text-center">
+          <div class="card-header">
+              <ul class="nav nav-tabs card-header-tabs">
+                  <li class="nav-item">
+                  <a class="nav-link active" href="#">Details</a>
+                  </li>
+                  <li class="nav-item">
+                  <a class="nav-link" data-toggle="modal" data-target="#staticBackdrop" href="#">Image Update</a>
+                  </li>
+              </ul>
+          </div>
+          <div class="card-body">
+            <!--fghh-->
+            <form action="" method="post" enctype="multipart/form-data">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                      <label for="exampleFormControlInput1">Date</label>
+                      <input type="date" value="<?php echo $Edate;?>" name="Edate" class="form-control" id="exampleFormControlInput1" placeholder="Date">
                   </div>
                 </div>
-                <div class="form-group">
-                    <label for="exampleFormControlInput1">Event Venue</label>
-                    <input type="text" name="venue" value="<?php echo $eVenue;?>" class="form-control" id="exampleFormControlInput1" placeholder="Venue ">
+
+                <div class="col-md-4">
+                  <div class="form-group">
+                      <label for="exampleFormControlInput1">Starting Time</label>
+                      <input type="time" name="stime" value="<?php echo $startTime;?>" class="form-control" id="exampleFormControlInput1" placeholder="Starting Time">
+                  </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="exampleFormControlInput1">Event Title</label>
-                    <input type="text" name="Etitle" value="<?php echo $eTitle;?>" class="form-control" id="exampleFormControlInput1" placeholder="Title of the Event">
-                </div>
-                <div class="form-group">
-                    <label for="exampleFormControlTextarea1">Event Post</label>
-                    <textarea class="form-control" name="content" id="exampleFormControlTextarea1" rows="3"><?php echo $ePost;?></textarea>
-                </div>
-                <button type="submit" name="EditEventBtn" class="btn btn-primary btn-lg btn-block">Add Event</button>
-              </form>
-            </div>
-            <!-- Modal -->
-            <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">Image Update</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="" method="post" enctype="multipart/form-data">
-                            <div class="input-group mb-3">
-                              <div class="custom-file">
-                                <input type="file" name="imagee" class="custom-file-input" id="inputGroupFile02">
-                                <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">Choose file</label>
-                              </div>
-                            </div>
-                            <button type="submit" name="EditPicBtn" class="btn btn-primary btn-lg btn-block">Update</button>
-                        </form>
-                    </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                      <label for="exampleFormControlInput1">Ending  Time</label>
+                      <input type="time" name="etime" value="<?php echo $endTime;?>" class="form-control" id="exampleFormControlInput1" placeholder="Ending Time">
+                  </div>
                 </div>
               </div>
-            </div>
-      </div>
-      </div>
-            <!-- End Model -->
 
-    <!---->
+              <div class="form-group">
+                  <label for="exampleFormControlInput1">Event Venue</label>
+                  <input type="text" name="venue" value="<?php echo $eVenue;?>" class="form-control" id="exampleFormControlInput1" placeholder="Venue ">
+              </div>
+
+              <div class="form-group">
+                  <label for="exampleFormControlInput1">Event Title</label>
+                  <input type="text" name="Etitle" value="<?php echo $eTitle;?>" class="form-control" id="exampleFormControlInput1" placeholder="Title of the Event">
+              </div>
+
+              <div class="form-group">
+                  <label for="exampleFormControlTextarea1">Event Post</label>
+                  <textarea class="form-control" name="content" id="exampleFormControlTextarea1" rows="3"><?php echo $ePost;?></textarea>
+              </div>
+              <button type="submit" name="EditEventBtn" class="btn btn-primary btn-lg btn-block">Update Event</button>
+            </form>
+          </div>
+          <!-- Modal -->
+          <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <h5 class="modal-title" id="staticBackdropLabel">Image Update</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
+                  <div class="modal-body">
+                      <form action="" method="post" enctype="multipart/form-data">
+                          <div class="input-group mb-3">
+                            <div class="custom-file">
+                              <input type="file" name="imagee" class="custom-file-input" id="inputGroupFile02">
+                              <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">Choose file</label>
+                            </div>
+                          </div>
+                          <button type="submit" name="EditPicBtn" class="btn btn-primary btn-lg btn-block">Update</button>
+                      </form>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Model -->
+    </div>
   </div>
-</div>
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
+    <!--script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script-->
+    <!--script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script-->
+    <script type="text/javascript" src="../js/bootstrap.bundle.min.js"></script>
 
     <!-- Option 2: jQuery, Popper.js, and Bootstrap JS
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

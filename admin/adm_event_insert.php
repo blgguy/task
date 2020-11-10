@@ -7,7 +7,7 @@ $error = $succmsg = $errmsg = $ttl = $cont ='';
 if (!$EventPost->im_logIn() ||(trim ($EventPost->session()) == '')) {
 	$EventPost->rd('logout.php');
 }
-$ky = $_SESSION['authbjgvjhv78547545gff3426587xgxgfbn'];
+$ky = $EventPost->session();
 $details = $EventPost->admLoginDetails($ky);
 foreach ($details as $key) {
     $name = $key['name'];
@@ -93,7 +93,8 @@ if (isset($_POST['addPostBtn'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <!--link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous"-->
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"">
 
     <title>Add Event Post</title>
   </head>
@@ -103,7 +104,7 @@ if (isset($_POST['addPostBtn'])) {
       <div class="col-md-8">
       <h1>Event Post Add</h1>
       <a class="btn btn-success" href="dashboard.php" role="button">Go to Dashboard</a>
-      <a class="btn btn-success" href="adm_view_view.php" role="button">View All Event</a>
+      <a class="btn btn-success" href="adm_event_view.php" role="button">View All Event</a>
       <?php if($error === 0){?>
       <div class="alert alert-success" role="alert">
         <?php echo $succmsg; ?>

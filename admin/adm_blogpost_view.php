@@ -11,7 +11,7 @@ if (!$Blog->im_logIn() || (trim ($Blog->session()) == '')) {
 }
 $error = $succmsg = $errmsg = '';
 
-$postVw = $Blog->BView('blogpost');
+$postVw = $Blog->View('blogpost');
 ?>
 <!doctype html>
 <html lang="en">
@@ -21,7 +21,8 @@ $postVw = $Blog->BView('blogpost');
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <!--link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous"-->
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"">
 
     <title>Blog Post</title>
   </head>
@@ -43,48 +44,42 @@ $postVw = $Blog->BView('blogpost');
               $Id       = $key['uniqKey'];
           ?>
             <div class="col-mb-6">
-            <div class="card bg-light col-mb-6" style="max-width: 20rem;">
-              <img src="<?php echo $Pimg;?>" alt="<?php echo $Ptitle;?>" class="card-img-top">
-              <div class="card-body">
-                <h5 class="card-title"><?php echo $Ptitle;?></h5>
-                <p class="card-text"><?php echo $Ppost;?></p>
-                <p class="card-text"><small class="text-muted">Posted by<?php echo $Pauthor;?></small></p>
-                <a class="btn btn-primary" href="adm_blogpost_edit.php?ref=<?php echo $Id;?>" role="button">Edit</a>
-                <button data-toggle="modal" data-target="#exampleModal" type="button" class="btn btn-danger">Delete</button>
+              <?php
+                if(isset($_SESSION['delete3455message'])){
+                  ?>
+                    <div class="alert alert-info text-center"><!--alert-danger-->
+                        <?php echo $_SESSION['delete3455message']; ?>
+                    </div>
+                  <?php
+
+                  unset($_SESSION['delete3455message']);
+                }
+              ?>
+              <div class="card bg-light col-mb-6" style="max-width: 20rem;">
+                <img src="<?php echo $Pimg;?>" alt="<?php echo $Ptitle;?>" class="card-img-top">
+                <div class="card-body">
+                  <h5 class="card-title"><?php echo $Ptitle;?></h5>
+                  <p class="card-text"><?php echo $Ppost;?></p>
+                  <p class="card-text"><small class="text-muted">Posted by<?php echo $Pauthor;?></small></p>
+                  <a class="btn btn-primary" href="adm_blogpost_edit.php?ref=<?php echo $Id;?>" role="button">Edit</a>
+                  <a class="btn btn-danger" href="adm_blogpost_del.php?ref=<?php echo $Id;?>" role="button">Delete</a>
+                </div>
               </div>
-            </div></div>
+            </div>
           <?php } ?>
         </div>
       </div>
     </div>
 
-     <!-- Modal -->
-     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title btn-outline-danger" id="exampleModalLabel">Danger zone</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                  Are you sure you wanna delete this data.
-                  </div>
-                  <div class="modal-footer">
-                    <a class="btn btn-success" href="adm_blogpost_del.php?ref=<?php echo $Id;?>" role="button">Yes</a>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>   
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!---->
+     
     
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
+    <!--script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script-->
+    <!--script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script-->
+    <script type="text/javascript" src="../js/bootstrap.bundle.min.js"></script>
 
     <!-- Option 2: jQuery, Popper.js, and Bootstrap JS
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

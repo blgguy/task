@@ -56,9 +56,9 @@ class Engine extends DB
         return $postData;
     }
 
-	public function BView($table)
-	{
-		$sql = "SELECT * FROM $table ORDER BY id ASC";
+    public function View($table)
+    {
+        $sql = "SELECT * FROM `$table`";
         $query = $this->connector->query($sql);
         $postData = array();
         while ($row = $query->fetch_array()){
@@ -221,45 +221,6 @@ class Engine extends DB
         if ($query) {
             return true;
         }
-    }
-    
-    public function AuthDubCause($title)
-    {
-        // Check the Requested id is valid or not
-        $sql = "SELECT * FROM `causes` WHERE title = '".$title."' LIMIT 1";
-        $query = $this->connector->query($sql);
-        $postData = array();
-        while ($row = $query->fetch_array()){
-            $postData[] = $row;
-        }
-            return $postData;
-    }
-
-    // Event <methods class="">
-    
-    public function EInsert($table, $fields)
-	{
-		$SQL  = "";
-        $SQL .= "INSERT INTO `".$table."`";
-        $SQL .= " (`".implode("`,`", array_keys($fields))."`) VALUES ";
-        $SQL .= "('".implode("','", array_values($fields))."')";
-        //echo $SQL;
-        $query = $this->connector->query($SQL);
-        if ($query) {
-            return true;
-        }
-    }
-    
-    public function AuthDubEvent($title)
-    {
-        // Check the Requested id is valid or not
-        $sql = "SELECT * FROM `causes` WHERE title = '".$title."' LIMIT 1";
-        $query = $this->connector->query($sql);
-        $postData = array();
-        while ($row = $query->fetch_array()){
-            $postData[] = $row;
-        }
-            return $postData;
     }
 }
 	

@@ -8,7 +8,7 @@ if (!$blogPost->im_logIn() ||(trim ($blogPost->session()) == '')) {
 	$blogPost->rd('login.php');
 }
 
-$ky = $_SESSION['authbjgvjhv78547545gff3426587xgxgfbn'];
+$ky = $blogPost->session();
 $details = $blogPost->admLoginDetails($ky);
 foreach ($details as $key) {
     $name = $key['name'];
@@ -45,7 +45,7 @@ if (isset($_POST['addPostBtn'])) {
     );
 
     // statement to validate dublicate data.
-    $authDublicate = $blogPost->AuthDubPost($title);
+    $authDublicate = $blogPost->AuthDub('blogpost', $title);
     
     foreach ($authDublicate as $fetky) {
       $ttl = $fetky['title'];
@@ -84,7 +84,8 @@ if (isset($_POST['addPostBtn'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <!--link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous"-->
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"">
 
     <title>Add Blog Post</title>
   </head>
